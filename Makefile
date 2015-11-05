@@ -128,7 +128,6 @@ nodata ::
 	rm -f hours.dat moria.dat death.log moriamas.dat moriatop.dat moriatrd.dat moria_gcustom.mst TRADE.DUMP
 
 clean ::
-	( cd mtwist ; make clean )
 	rm -f *.o *~ core imoria i2 Debug.out mm
 
 spotless : nodata clean
@@ -137,124 +136,124 @@ spotless : nodata clean
 #############################################################################
 ### DEPENDENCIES FOLLOW #######################################################
 
-bank.o: bank.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+bank.o: bank.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-bj.o: bj.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+bj.o: bj.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h casino.h bj.h
-blackmarket.o: blackmarket.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+blackmarket.o: blackmarket.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-blow.o: blow.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+blow.o: blow.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-casino.o: casino.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+casino.o: casino.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  casino.h slots.h horse.h bj.h
-create.o: create.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+create.o: create.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-creature.o: creature.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+creature.o: creature.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-death.o: death.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+death.o: death.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h master.h
-debug.o: debug.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+debug.o: debug.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-desc.o: desc.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+desc.o: desc.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-dungeon.o: dungeon.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+dungeon.o: dungeon.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-eat.o: eat.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+eat.o: eat.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-encrypt.o: encrypt.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+encrypt.o: encrypt.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-files.o: files.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+files.o: files.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h master.h
-generate.o: generate.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+generate.o: generate.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  generate.h
-help.o: help.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+help.o: help.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-horse.o: horse.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+horse.o: horse.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h casino.h \
  horse.h
-insurance.o: insurance.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+insurance.o: insurance.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-inven.o: inven.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+inven.o: inven.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-io.o: io.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+io.o: io.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-magic.o: magic.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+magic.o: magic.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-master.o: master.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+master.o: master.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  master.h
-misc.o: misc.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+misc.o: misc.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-monk.o: monk.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+monk.o: monk.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-monsters.o: monsters.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+monsters.o: monsters.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-moria.o: moria.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+moria.o: moria.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h values.h
-netopen.o: netopen.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+netopen.o: netopen.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-pascal.o: pascal.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+pascal.o: pascal.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-play.o: play.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+play.o: play.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-player.o: player.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+player.o: player.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-port.o: port.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+port.o: port.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-potions.o: potions.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+potions.o: potions.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-prayer.o: prayer.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+prayer.o: prayer.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-quest.o: quest.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+quest.o: quest.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h
-random.o: random.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+random.o: random.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-river.o: river.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+river.o: river.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h generate.h
-rooms.o: rooms.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+rooms.o: rooms.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h generate.h
-save.o: save.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+save.o: save.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h master.h
-screen.o: screen.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+screen.o: screen.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-scrolls.o: scrolls.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+scrolls.o: scrolls.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-sing.o: sing.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+sing.o: sing.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-slots.o: slots.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+slots.o: slots.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h casino.h \
  slots.h
-spells.o: spells.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+spells.o: spells.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-staffs.o: staffs.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+staffs.o: staffs.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
-store.o: store.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+store.o: store.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-term.o: term.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+term.o: term.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h config.h
-termdef.o: termdef.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+termdef.o: termdef.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
-trade.o: trade.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+trade.o: trade.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h trade.h
-traps.o: traps.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+traps.o: traps.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h \
  trade.h
-treasure.o: treasure.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+treasure.o: treasure.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h
 unix.o: unix.c term.h
-wands.o: wands.c imoria.h mtwist/mtwist.h patchlevel.h configure.h constants.h \
+wands.o: wands.c imoria.h patchlevel.h configure.h constants.h \
  types.h pascal.h routines.h term.h debug.h variables.h dungeon.h
-wizard.o: wizard.c imoria.h mtwist/mtwist.h patchlevel.h configure.h \
+wizard.o: wizard.c imoria.h patchlevel.h configure.h \
  constants.h types.h pascal.h routines.h term.h debug.h variables.h \
  dungeon.h
