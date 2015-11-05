@@ -1,7 +1,7 @@
 /* configure.h*/
 /* include file for fun configurable stuff */
 
-/* 
+/*
    My system has des_crypt.h, some do not.  Set to 0 to disable des encryption
    in favor of xor against random numbers.  It turns out that it was happier
    to xor everything against the random numbers even when DES was going to be
@@ -9,7 +9,7 @@
 */
 #define ENABLE_DES    0
 
-/* 
+/*
    If USE_MTWIST is 0 then rand() will be used rather than the
    Mersenne Twister library.
 */
@@ -24,9 +24,8 @@
   WARNING:  Be sure to copy monsters.dat to this directory!  The game
             will attempt to create the other files the first time that
 	    it is run.
-	    
+
 */
-#define DATA_FILE_PATH "/home/kertes/icmoria"
 
 /*
   Keep this one under 160 characters, it points to the help program...
@@ -37,7 +36,7 @@
 /*
   The curses I have on my system defines attr_get() and attrset(attr)
   differently than the one that a lot of people using Red Hat have.
-  
+
   I don't know what to use to get and set the attributes with the
   newer library so change this to 1 if you want to try the nifty
   attr changes I added.  Otherwise you can leave it set to 0 and

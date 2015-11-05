@@ -43,7 +43,7 @@ LIBS =		$(CURSES) -lm -lgdbm
 #COPTS =		-Wall
 COPTS =		-Wall -g3 -Ilibmtwist
 
-CFLAGS =	$(COPTS) $(INCLUDES) $(DEFINES)
+CFLAGS =	$(COPTS) $(INCLUDES) $(DEFINES) -DDATA_FILE_PATH="\"$(shell pwd)\""
 LDFLAGS =
 
 #
@@ -61,44 +61,9 @@ DATAFILES =	$(READFILES) $(WRITEFILES)
 
 all:	mtwist imoria
 
-#############################################################################
-#
-# You have several choices on how to link the random number generator
-# library into the game.  The "good" way makes a dynamic library that
-# needs to be installed to /usr/lib or /lib.  This is best because it
-# keeps the GNU Library GPL happy.  However if you are not able to install
-# the library (root needs to do it) then you can use the easy non-library
-# way.
-#
-# The easy way is first, rather than create a library the obj file is
-# linked just like all the IMORIAOBJS, section 6 of the GNU Library GPL
-# covers this.  Imoria is not supposed to be under the GPL, so do not
-# distribute binaries made this way (see mtwist/COPYING).  I think that
-# I satisfy the exception stuff in section 7.1, but I don't really know.
-#
-# The second way compiles the library and copies it to /usr/local/lib
-# so it can be loaded at runtime.
-#
-# A third option is to just ignore the entire issue and use rand().
-# You need to change the USE_MTWIST setting in configure.h
-#
-
-#              Non shared library version
 mtwist ::
 	$(CC) $(CFLAGS) -Ilibmtwist -c libmtwist/mt.c libmtwist/seed.c
 MTWIST = mt.o seed.o
-
-#              Library version
-#mtwist	::
-#	(cd mtwist ; make lib)
-#	(cd mtwist ; make install)
-#MTWIST = -lmtwist
-
-#              Do not bother version
-#mtwist ::
-#	echo mtwist libary skipped
-#MTWIST =
-
 
 IMORIAOBJS =	bank.o bj.o blow.o casino.o create.o creature.o death.o debug.o desc.o dungeon.o eat.o encrypt.o files.o generate.o help.o horse.o insurance.o inven.o io.o magic.o master.o misc.o monk.o monsters.o moria.o netopen.o pascal.o play.o player.o port.o potions.o prayer.o quest.o random.o river.o rooms.o save.o screen.o scrolls.o sing.o slots.o spells.o staffs.o store.o term.o termdef.o trade.o traps.o treasure.o unix.o wands.o wizard.o
 

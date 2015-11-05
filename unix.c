@@ -311,6 +311,7 @@ char *buf;
 
 /* expands a tilde at the beginning of a file name to a users home
    directory */
+#if 0
 int tilde(file, exp)
 char *file, *exp;
 {
@@ -346,11 +347,13 @@ char *file, *exp;
     }
   return 0;
 }
+#endif
 
 /* undefine these so that tfopen and topen will work */
 #undef fopen
 #undef open
 
+#if 0
 /* open a file just as does fopen, but allow a leading ~ to specify a home
    directory */
 FILE *tfopen(file, mode)
@@ -365,6 +368,7 @@ char *mode;
   errno = ENOENT;
   return NULL;
 }
+#endif
 
 /* open a file just as does open, but expand a leading ~ into a home directory
    name */
