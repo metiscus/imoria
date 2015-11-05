@@ -2,6 +2,7 @@
 /**/
 
 #include "imoria.h"
+#include <stdio.h>
 #include <signal.h>
 
 void convert_time(
@@ -9,9 +10,9 @@ void convert_time(
 		  quad_type *bin_time)
 {
   printf("UNIMPLEMENTED convert_time\n\r");
-}; 
+};
 
-void sleep_(unsigned long int_time) 
+void sleep_(unsigned long int_time)
 {
   /*{ Sleep for given time					-RAK-	}*/
   /*{ NOTE: Int_time is in seconds					}*/
@@ -25,7 +26,7 @@ void mini_sleep(unsigned long int_time)
 
   usleep(int_time);
 
-}; 
+};
 
 void init_priv_switch()
 {
@@ -46,7 +47,7 @@ void priv_switch(integer switch_val)
   } else {
     setegid(getgid());
   }
-  
+
 };
 
 void signalexit()
@@ -93,11 +94,11 @@ void signalsuspend()
   if (game_state == GS_HELP) {
     signal(SIGTSTP,(void *)signalsuspend);
   } else {
-    
+
     priv_switch(0);
     echo();
     nocbreak();
-    
+
     switch (game_state) {
     case GS_GET_COMMAND:
       clear_screen();
@@ -109,23 +110,23 @@ void signalsuspend()
       put_qio();
       break;
     }
-    
+
 #if DO_DEBUG
     fprintf(debug_file,": suspending...\n");
     fflush(debug_file);
-#endif      
-    
+#endif
+
     kill(getpid(), SIGTSTP);
     signal(SIGTSTP,(void *)signalsuspend);
-    
+
 #if DO_DEBUG
     fprintf(debug_file,": ...resuming\n");
     fflush(debug_file);
-#endif      
-    
+#endif
+
     cbreak();
     noecho();
-    
+
     switch (game_state) {
     case GS_GET_COMMAND:
       clear_screen();
@@ -142,7 +143,7 @@ void signalsuspend()
 };
 
 void no_controly()
-{ 
+{
   // { Turn off Control-Y					-RAK-	}
   /* ok, this is unix not vms, so it turns off ^C and ^Z */
 
@@ -206,7 +207,7 @@ void exit_game()
   exit(0);      // { exit from game		}
 };
 
-void init_channel() 
+void init_channel()
 {
   /* XXXX */
 };
@@ -215,7 +216,7 @@ void init_channel()
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-void msg_record(vtype message, boolean save) 
+void msg_record(vtype message, boolean save)
 {
   byteint  count;
   byteint  temp_ctr;
@@ -263,7 +264,7 @@ void msg_record(vtype message, boolean save)
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-void inkey_delay(char *getchar,integer delay) 
+void inkey_delay(char *getchar,integer delay)
 {
   /* XXXX check_input consumes the input, so we never actually get data */
 
@@ -277,7 +278,7 @@ void inkey_delay(char *getchar,integer delay)
 
 };
 
-void inkey_flush(char *x) 
+void inkey_flush(char *x)
 {
       put_qio();	/*{ Dup the IO buffer	}*/
       if (!(wizard1)) {
@@ -286,19 +287,19 @@ void inkey_flush(char *x)
       *x = inkey();
 };
 
-void get_message() 
+void get_message()
 {
 };
 
-void set_the_trap() 
+void set_the_trap()
 {
 };
 
-void disable_the_trap() 
+void disable_the_trap()
 {
 };
 
-void clear_rc(integer row,integer col) 
+void clear_rc(integer row,integer col)
 {
   /*	{ Clears screen at given row, column				}*/
   integer i1;
@@ -342,20 +343,20 @@ boolean msg_print_pass_one(char *str_buff) // : varying[a] of char;
     put_buffer(str_buff,msg_line,msg_line);
     strncpy(old_msg, str_buff, sizeof(vtype));
     msg_record(str_buff,true);
-    
+
     if (ic==3||ic==25||ic==26||ic==27) {
       return_value = true;
     } else {
       return_value = false;
     }
-    
+
     msg_flag = true;
   } else {
-    
+
     msg_flag = false;
-    
+
   }
-  
+
   RETURN("msg_print", "m", 'b',"msg", &return_value);
   return return_value;
 };
@@ -451,7 +452,7 @@ boolean get_yes_no(char *prompt) // : varying[a] of char;
   boolean   return_value = false;
 
   msg_print(" ");
-  
+
   sprintf(out_str, "%s (Y/N) ", prompt);
 
   get_com(out_str,&command);
@@ -471,33 +472,37 @@ integer get_hex_value(integer row,integer col,integer slen)
 
   if (get_string(tmp_str,row,col,slen)) {
     if (strlen(tmp_str) <= 8) {
-      
+
       sscanf(tmp_str, "%lx", &return_value);
-      
+
     }
   }
 
   return return_value;
 };
 
-void print_hex_value(integer num,integer row,integer col) 
+void print_hex_value(integer num,integer row,integer col)
 {
   vtype    out_val;
   sprintf(out_val, "0x%08lx", num);
   prt(out_val, row, col);
 };
 
-void pause_game(integer prt_line) 
+void pause_game(integer prt_line)
 {
   pause_line(prt_line);
 };
 
-void get_paths() 
+void get_paths()
 {
   //	{ Returns the image path for Moria			-RAK-	}
   //	{ Path is returned in a VARYING[80] of char			}
 
-  char *datapath = DATA_FILE_PATH;
+  char *datapath = getenv("PWD");
+  if(NULL == datapath)
+  {
+	  datapath = DATA_FILE_PATH;
+  }
 
   // fill in the MORIA_ names;
 

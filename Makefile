@@ -41,10 +41,10 @@ LIBS =		$(CURSES) -lm -lgdbm
 #COPTS =		-Wall -O2 -g3
 #COPTS =		-Wall -O2
 #COPTS =		-Wall
-COPTS =		-Wall -g3
+COPTS =		-Wall -g3 -Ilibmtwist
 
 CFLAGS =	$(COPTS) $(INCLUDES) $(DEFINES)
-LDFLAGS =	
+LDFLAGS =
 
 #
 # the owner and group for the game and data files
@@ -84,20 +84,20 @@ all:	mtwist imoria
 #
 
 #              Non shared library version
-#mtwist ::
-#	(cd mtwist ; make obj )
-#MTWIST = mtwist/mtwist.o
+mtwist ::
+	$(CC) $(CFLAGS) -Ilibmtwist -c libmtwist/mt.c libmtwist/seed.c
+MTWIST = mt.o seed.o
 
 #              Library version
-mtwist	::
-	(cd mtwist ; make lib)
-	(cd mtwist ; make install)
-MTWIST = -lmtwist
+#mtwist	::
+#	(cd mtwist ; make lib)
+#	(cd mtwist ; make install)
+#MTWIST = -lmtwist
 
 #              Do not bother version
 #mtwist ::
 #	echo mtwist libary skipped
-#MTWIST = 
+#MTWIST =
 
 
 IMORIAOBJS =	bank.o bj.o blow.o casino.o create.o creature.o death.o debug.o desc.o dungeon.o eat.o encrypt.o files.o generate.o help.o horse.o insurance.o inven.o io.o magic.o master.o misc.o monk.o monsters.o moria.o netopen.o pascal.o play.o player.o port.o potions.o prayer.o quest.o random.o river.o rooms.o save.o screen.o scrolls.o sing.o slots.o spells.o staffs.o store.o term.o termdef.o trade.o traps.o treasure.o unix.o wands.o wizard.o
@@ -105,9 +105,9 @@ IMORIAOBJS =	bank.o bj.o blow.o casino.o create.o creature.o death.o debug.o des
 
 imoria: $(IMORIAOBJS)
 	$(CC) $(LDFLAGS) $(IMORIAOBJS) $(LIBS) $(MTWIST) -o $@
-	chown $(OWNER):$(GROUP) imoria
-	chmod 2711 imoria
-	echo
+#	chown $(OWNER):$(GROUP) imoria
+#	chmod 2711 imoria
+#	echo
 
 
 depend ::

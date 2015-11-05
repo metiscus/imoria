@@ -4,6 +4,23 @@
 #include "imoria.h"
 #include <sys/time.h>
 
+#if USE_MTWIST
+#include "mtwist.h"
+static mtwist *g_random = NULL;
+#endif
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+inline void create_random()
+{
+#if USE_MTWIST
+    if(g_random == NULL)
+    {
+        g_random = mtwist_new();
+        mtwist_seed_from_system(g_random);
+    }
+#endif
+}
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -12,6 +29,8 @@ unsigned long get_seed()
 //	{ Use date and time to produce a random seed	-RAK-	}
   struct timeval tv;
   unsigned long the_seed;
+
+  create_random();
 
   ENTER("get_seed","");
 
@@ -23,7 +42,7 @@ unsigned long get_seed()
 
   RETURN("get_seed","",'u',"rand seed",&the_seed);
   return the_seed;
-}; /* end get_seed */
+} /* end get_seed */
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -34,10 +53,10 @@ void set_seed(unsigned long the_seed)
 #if DO_DEBUG
   fprintf(debug_file,"set_seed: s= %ld\n",the_seed);
   fflush(debug_file);
-#endif	  
+#endif
 
 #if USE_MTWIST
-  seedMT(the_seed);
+  mtwist_init(g_random, the_seed);
 #else
   srand(the_seed);
 #endif
@@ -73,10 +92,10 @@ integer randint(integer maxval)
 /* Generates a random integer x where 1<=X<=MAXVAL	-RAK-	*/
 
   integer r = 0;
-  
+
   if (maxval) {
 #if USE_MTWIST
-    r = ((randomMT() % maxval) + 1);
+    r = ((mtwist_u32rand(g_random) % maxval) + 1);
 #else
     r = ((rand() % maxval) + 1);
 #endif
@@ -86,7 +105,7 @@ integer randint(integer maxval)
 #if DO_DEBUG
    fprintf(debug_file, "   rand:  %ld\t(%ld)\n", r, maxval);
    fflush(debug_file);
-#endif	  
+#endif
 */
 
   return r;
@@ -96,23 +115,14 @@ integer randint(integer maxval)
 //////////////////////////////////////////////////////////////////////
 void *save_rand_state(void *randState)
 {
-#if USE_MTWIST
-  return saveMTstate(randState);
-#else
   return NULL;
-#endif
 };
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 void restore_rand_state(void *randState)
 {
-#if USE_MTWIST
-  if (randState != NULL) {
-    restoreMTstate(randState);
-    free(randState);
-  }
-#endif
+    ;
 };
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
